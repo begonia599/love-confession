@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表白小程序</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background-color: #FFE6F0; /* 淡粉色背景 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+        .container {
+            position: relative;
+            width: 400px;
+            height: 800px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            background-color: #FFE6F0;
+            overflow: hidden;
+        }
+        .emoji {
+            width: 150px;
+            height: 150px;
+            margin-top: 120px;
+            margin-bottom: 40px;
+            transition: all 0.5s ease;
+        }
+        .title {
+            color: #32328C; /* 深蓝色 */
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+        }
+        .button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #C8C8C8; /* 灰色 */
+            user-select: none;
+        }
+        .button:hover {
+            background-color: #FF0000; /* 红色 */
+        }
+        .yes-button {
+            width: 120px;
+            height: 60px;
+        }
+        .no-button {
+            width: 120px;
+            height: 60px;
+        }
+        .success-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+        .success-emoji {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 40px;
+        }
+        .success-text {
+            color: #C80064; /* 深粉色 */
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .disabled {
+            background-color: #969696 !important;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="normal-screen">
+            <img id="emoji" class="emoji" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAxNi4yYTguOSA4LjkgMCAwIDEtNCAyLjVBOC45IDguOSAwIDAgMSAxMiAyMGE4LjkgOC45IDAgMCAxLTQtMS4zQTguOSA4LjkgMCAwIDEgNCAxNi4yYTggOCAwIDAgMSA4LThIOGE0IDQgMCAwIDEgNC00djJhMiAyIDAgMSAwIDQgMHYyYTQgNCAwIDAgMSA0IDRoLTRhOCA4IDAgMCAxIDggOHoiIGZpbGw9IiNGRjUxN0IiPjwvcGF0aD48cGF0aCBkPSJNOC4wNzkgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNS45MjEgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMy41YzEgMCAxLTIgMi0yaDFjMSAwIDEgMiAyIDIiPjwvcGF0aD48L3N2Zz4=" alt="表情">
+            <div class="title">可以成为我的恋人吗？</div>
+            <div class="buttons">
+                <div id="yes-button" class="button yes-button">可以</div>
+                <div id="no-button" class="button no-button">不可以</div>
+            </div>
+        </div>
+        <div id="success-screen" class="success-screen">
+            <img class="success-emoji" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGNjE4QyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6IiBmaWxsPSIjRkYwMDQ0Ij48L3BhdGg+PC9zdmc+" alt="成功表情">
+            <div class="success-text">
+                你若是珍惜我<br>
+                这条路再累我也陪你走！
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 表情图片数组 - 使用SVG内联数据 
+        const emojis = [
+            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAxNi4yYTguOSA4LjkgMCAwIDEtNCAyLjVBOC45IDguOSAwIDAgMSAxMiAyMGE4LjkgOC45IDAgMCAxLTQtMS4zQTguOSA4LjkgMCAwIDEgNCAxNi4yYTggOCAwIDAgMSA4LThIOGE0IDQgMCAwIDEgNC00djJhMiAyIDAgMSAwIDQgMHYyYTQgNCAwIDAgMSA0IDRoLTRhOCA4IDAgMCAxIDggOHoiIGZpbGw9IiNGRjUxN0IiPjwvcGF0aD48cGF0aCBkPSJNOC4wNzkgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNS45MjEgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMy41YzEgMCAxLTIgMi0yaDFjMSAwIDEgMiAyIDIiPjwvcGF0aD48L3N2Zz4=",
+            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA4LjVoLjAxIj48L3BhdGg+PHBhdGggZD0iTTE2IDguNWguMDEiPjwvcGF0aD48cGF0aCBkPSJNOCAxNHMxLjUgMiA0IDIgNC0yIDQtMiI+PC9wYXRoPjwvc3ZnPg==",
+            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA5IDogTTYgMTJzMiAzIDYgMyA2LTMgNi0zIj48L3BhdGg+PHBhdGggZD0iTTE2IDlNOC41IDEwYy43IDAgMS41LS4yIDIuNS0uOCIgc3Ryb2tlPSIjZmZmIj48L3BhdGg+PHBhdGggZD0iTTE1LjUgMTBjLS43IDAtMS41LS4yLTIuNS0uOCIgc3Ryb2tlPSIjZmZmIj48L3BhdGg+PC9zdmc+",
+            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA5VjhhMiAyIDAgMSAxIDQgMCA0IDQgMCAwIDAgOCAwIj48L3BhdGg+PHBhdGggZD0iTTggMTVzMiAyIDQgMiA0LTIgNC0yIj48L3BhdGg+PC9zdmc+",
+            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA5djJtOC0ydjJNOCAxNWMuNS44IDEuNiAyIDQgMnM0LTEuMyA0LTIiPjwvcGF0aD48L3N2Zz4="
+        ];
+
+        // 不可以按钮的文本列表
+        const noButtonTexts = [
+            "不可以",
+            "你是认真的吗？",
+            "好好选！不可以调皮",
+            "乖，听话！",
+            "最后的机会了"
+        ];
+
+        // 获取DOM元素
+        const emoji = document.getElementById('emoji');
+        const yesButton = document.getElementById('yes-button');
+        const noButton = document.getElementById('no-button');
+        const normalScreen = document.getElementById('normal-screen');
+        const successScreen = document.getElementById('success-screen');
+
+        // 状态变量
+        let emojiIndex = 0;
+        let noClickCount = 0;
+        let firstClick = true;
+        let noButtonDisabled = false;
+
+        // 更新表情图片
+        function updateEmoji() {
+            emoji.src = emojis[emojiIndex];
+        }
+
+        // 进入成功模式
+        function enterSuccessMode() {
+            normalScreen.style.display = 'none';
+            successScreen.style.display = 'flex';
+        }
+
+        // 点击"可以"按钮
+        yesButton.addEventListener('click', function() {
+            enterSuccessMode();
+        });
+
+        // 点击"不可以"按钮
+        noButton.addEventListener('click', function() {
+            if (noButtonDisabled) return;
+
+            // 增加点击计数
+            noClickCount++;
+            
+            // 更新表情包
+            emojiIndex = (emojiIndex + 1) % emojis.length;
+            updateEmoji();
+            
+            // 更新按钮文本
+            if (noClickCount < noButtonTexts.length) {
+                noButton.textContent = noButtonTexts[noClickCount];
+            }
+            
+            // 检查是否达到点击上限
+            if (noClickCount >= 5) {
+                noButtonDisabled = true;
+                noButton.classList.add('disabled');
+            } else {
+                if (firstClick) {
+                    // 第一次点击时，"不可以"按钮宽度变长，高度缩小
+                    noButton.style.width = (120 * 1.2) + 'px';
+                    noButton.style.height = (60 * 0.9) + 'px';
+                    
+                    // "可以"按钮稍微变大
+                    yesButton.style.width = (120 * 1.15) + 'px';
+                    yesButton.style.height = (60 * 1.1) + 'px';
+                    
+                    firstClick = false;
+                } else {
+                    // 让"可以"按钮向右扩展
+                    const newYesWidth = Math.min(parseInt(yesButton.style.width || 120) + 15, 400 * 0.65);
+                    const newYesHeight = Math.min(parseInt(yesButton.style.height || 60) + 5, 100);
+                    
+                    // 计算扩展量
+                    const expansion = newYesWidth - parseInt(yesButton.style.width || 120);
+                    
+                    // "不可以"按钮宽度减小
+                    const newNoWidth = Math.max(parseInt(noButton.style.width || 120) - 12, 50);
+                    
+                    // 更新按钮样式
+                    yesButton.style.width = newYesWidth + 'px';
+                    yesButton.style.height = newYesHeight + 'px';
+                    noButton.style.width = newNoWidth + 'px';
+                    
+                    // 向右移动"不可以"按钮
+                    const noButtonTranslateX = (noClickCount - 1) * 15;
+                    noButton.style.transform = `translateX(${noButtonTranslateX}px)`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
