@@ -102,7 +102,7 @@
 <body>
     <div class="container">
         <div id="normal-screen">
-            <img id="emoji" class="emoji" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAxNi4yYTguOSA4LjkgMCAwIDEtNCAyLjVBOC45IDguOSAwIDAgMSAxMiAyMGE4LjkgOC45IDAgMCAxLTQtMS4zQTguOSA4LjkgMCAwIDEgNCAxNi4yYTggOCAwIDAgMSA4LThIOGE0IDQgMCAwIDEgNC00djJhMiAyIDAgMSAwIDQgMHYyYTQgNCAwIDAgMSA0IDRoLTRhOCA4IDAgMCAxIDggOHoiIGZpbGw9IiNGRjUxN0IiPjwvcGF0aD48cGF0aCBkPSJNOC4wNzkgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNS45MjEgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMy41YzEgMCAxLTIgMi0yaDFjMSAwIDEgMiAyIDIiPjwvcGF0aD48L3N2Zz4=" alt="表情">
+            <img id="emoji" class="emoji" src="images/emoji1.svg" alt="表情">
             <div class="title">可以成为我的恋人吗？</div>
             <div class="buttons">
                 <div id="yes-button" class="button yes-button">可以</div>
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div id="success-screen" class="success-screen">
-            <img class="success-emoji" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGNjE4QyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6IiBmaWxsPSIjRkYwMDQ0Ij48L3BhdGg+PC9zdmc+" alt="成功表情">
+            <img class="success-emoji" src="images/success.svg" alt="成功表情">
             <div class="success-text">
                 你若是珍惜我<br>
                 这条路再累我也陪你走！
@@ -119,13 +119,13 @@
     </div>
 
     <script>
-        // 表情图片数组 - 使用SVG内联数据 
+        // 表情图片数组 - 使用外部图片路径
         const emojis = [
-            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAxNi4yYTguOSA4LjkgMCAwIDEtNCAyLjVBOC45IDguOSAwIDAgMSAxMiAyMGE4LjkgOC45IDAgMCAxLTQtMS4zQTguOSA4LjkgMCAwIDEgNCAxNi4yYTggOCAwIDAgMSA4LThIOGE0IDQgMCAwIDEgNC00djJhMiAyIDAgMSAwIDQgMHYyYTQgNCAwIDAgMSA0IDRoLTRhOCA4IDAgMCAxIDggOHoiIGZpbGw9IiNGRjUxN0IiPjwvcGF0aD48cGF0aCBkPSJNOC4wNzkgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xNS45MjEgMTAuMjIyYS44MjcuODI3IDAgMSAwIDAtMS42NTQuODI3LjgyNyAwIDAgMCAwIDEuNjU0eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMiAxMy41YzEgMCAxLTIgMi0yaDFjMSAwIDEgMiAyIDIiPjwvcGF0aD48L3N2Zz4=",
-            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA4LjVoLjAxIj48L3BhdGg+PHBhdGggZD0iTTE2IDguNWguMDEiPjwvcGF0aD48cGF0aCBkPSJNOCAxNHMxLjUgMiA0IDIgNC0yIDQtMiI+PC9wYXRoPjwvc3ZnPg==",
-            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA5IDogTTYgMTJzMiAzIDYgMyA2LTMgNi0zIj48L3BhdGg+PHBhdGggZD0iTTE2IDlNOC41IDEwYy43IDAgMS41LS4yIDIuNS0uOCIgc3Ryb2tlPSIjZmZmIj48L3BhdGg+PHBhdGggZD0iTTE1LjUgMTBjLS43IDAtMS41LS4yLTIuNS0uOCIgc3Ryb2tlPSIjZmZmIj48L3BhdGg+PC9zdmc+",
-            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA5VjhhMiAyIDAgMSAxIDQgMCA0IDQgMCAwIDAgOCAwIj48L3BhdGg+PHBhdGggZD0iTTggMTVzMiAyIDQgMiA0LTIgNC0yIj48L3BhdGg+PC9zdmc+",
-            "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZGQTVCNCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIiBmaWxsPSIjRkY1MTdCIj48L2NpcmNsZT48cGF0aCBkPSJNOCA5djJtOC0ydjJNOCAxNWMuNS44IDEuNiAyIDQgMnM0LTEuMyA0LTIiPjwvcGF0aD48L3N2Zz4="
+            "images/emoji1.svg",
+            "images/emoji2.svg",
+            "images/emoji3.svg",
+            "images/emoji4.svg",
+            "images/emoji5.svg"
         ];
 
         // 不可以按钮的文本列表
